@@ -117,9 +117,9 @@ const filtrandoElementos = function () {
 
 };
 
-const removerElemento = function(nomeProdutos){
+const removerElemento = function(array, nomeProdutos){
     //Cria uma cópia do array
-    let novaLista = listaProdutos.slice();
+    let novaLista = array.slice();
     let nome = nomeProdutos;
     let indice = novaLista.indexOf(nome);
     let status;
@@ -139,7 +139,7 @@ const removerElemento = function(nomeProdutos){
 
 };
 
-console.log(removerElemento('Monitor'));
+console.log(removerElemento(listaProdutos,'PC'));
 console.log(listaProdutos);
 
 
