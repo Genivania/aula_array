@@ -12,6 +12,20 @@
 //typeof serve para ver o tipo de dados desse elemento
 const listaNomes = ['José', 'Maria', 'Carol', 'Leo', 'Zé'];
 const listaProdutos = ['Teclado', 'Mouse', 'Monitor', 'Computador', 'Fone', 'Impressora', 'Scanner', 'WebCam'];
+const listaProdutosJSON = {};  //manipulando um json e nao um array 
+const listProdutosJSON = {};
+
+/**
+ * Exemplo de um JSON com strutura de array
+
+    produtos = {
+                [
+                    {nome : "Teclado", cor : "Preto", qunatidade : 50}
+                    {nome : "Monitor", cor : "Branco", qunatidade : 30}
+                    {nome : "Mouse", cor : "Branco", qunatidade : 200}
+                ]
+    }
+ */
 
 
 const manipulandoElementos = function () {
@@ -69,7 +83,6 @@ const manipulandoElementos = function () {
         console.log(`Nome: ${nomes}`)
     });
 
-
     //Adicionando elementos novos no array
     //PUSH - Adicioa elementos no final do array
     console.log('\n----------------PUSH----------------------')
@@ -117,7 +130,7 @@ const filtrandoElementos = function () {
 
 };
 
-const removerElemento = function(array, nomeProdutos){
+const removerElemento = function (array, nomeProdutos) {
     //Cria uma cópia do array
     let novaLista = array.slice();
     let nome = nomeProdutos;
@@ -125,22 +138,98 @@ const removerElemento = function(array, nomeProdutos){
     let status;
 
     //splice - permite remover um elemento do array pelo indice
-    if(indice >= 0){
+    if (indice >= 0) {
         novaLista.splice(indice, 1);
         status = true;
-    }else{
+    } else {
         status = false;
     }
-    
-    if(status)
+
+    if (status)
         return novaLista;
-    else 
+    else
         return status;
 
 };
 
-console.log(removerElemento(listaProdutos,'PC'));
-console.log(listaProdutos);
+
+const listagemProdutos = function () {
+
+    let listProdutos = [
+        { nome: 'Teclado DELL', valor: 200, quantidade: 50 },
+        { nome: 'Monitor DELL', valor: 1000, quantidade: 70 },
+        { nome: 'Mouse DELL', valor: 100, quantidade: 350 },
+    ];
+
+    let listCores = ['Branco', 'Preto', 'Cinza'];
+    let listTipoTeclado = ['Mecanico', 'Semi-Mecanico', 'Membrana'];
+    let listTipoMonitor = ['LCD', 'Full-HD', '4K', 'OLED'];
+
+
+    //Adiciona chaves (opções) no teclado;
+
+    listProdutos[0].cores = listCores;
+    listProdutos[0].tipo = listTipoTeclado;
+
+    //Adiciona chaves (opções) no Monitor;
+
+    listProdutos[1].cores = listCores;
+    listProdutos[1].tipo = listTipoMonitor;
+
+    //Adiciona chaves (opções) no Mouse;
+    listProdutos[2].cores = listCores;
+
+    //Adiciona uma chave produtos e coloca toda a estrutura dos produtos dentro dela
+    listProdutosJSON.produtos = listProdutos;
+
+    listaProdutosJSON.produtos = listaProdutos;
+    listaProdutosJSON.clientes = listaNomes;
+
+    console.log(listProdutosJSON);
+
+    console.log('---------------------------------------------------------------------------------------------------\n')
+
+    //RETORNA TODOS OS DADOS DE PRODUTO (1º nível do dados do JSON)
+    listProdutosJSON.produtos.forEach(function(dadosProduto){
+        console.log('Nome: ' + dadosProduto.nome);
+        console.log('Valor: ' + dadosProduto.valor);
+        
+        //Validação para tratar quando não existe cores de produtos
+        if(dadosProduto.cores != undefined){
+        //RETORNA TODAS AS CORES EXISTENTES PARA CADA PRODUTO
+        console.log('Cores: ');
+        dadosProduto.cores.forEach(function(dadosCores){
+            console.log('** ' + dadosCores );
+        
+        });
+        }
+
+        //Validação para tratar quando não existe tipos de produtos
+        if(dadosProduto.tipo != undefined){
+        //RETORNA OS TIPOS EXISTENTES DE CADA PRODUTO
+        console.log('Tipos: ');
+        dadosProduto.tipo.forEach(function(dadosTipo){
+            console.log('**' + dadosTipo);
+        });
+        }
+       
+        console.log('------------------------\n')
+    });
+
+
+    // console.log('Nome: ' + listProdutosJSON.produtos[1].nome);
+    // console.log('Valor: ' +listProdutosJSON.produtos[1].valor);
+    // console.log('Cor: ' + listProdutosJSON.produtos[1].cores[1]);
+
+
+    // console.log(listaProdutosJSON);
+    //console.log(listaProdutosJSON.clientes[2]);
+};
+
+listagemProdutos();
+
+// console.log(removerElemento(listaProdutos,'PC'));
+//console.log(listaProdutos);
 
 
 
